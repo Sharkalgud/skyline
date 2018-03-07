@@ -1,0 +1,18 @@
+<form action="inner.html">
+	<input type="text" placeholder="Email" ><br>
+	<input type="password" placeholder="Password"><br>
+	<input type="submit" class="btnRegister" value="LOGIN">
+</form>
+
+<form action = "" method = "post">
+	{{ form.hidden_tag() }}
+	<p>
+		{{ form.email.label }}<br>
+	    {{ form.email(size=32) }}
+	</p>
+	<p>
+		 {{ form.password.label }}<br>
+         {{ form.password(size=32) }}
+	</p>
+	<p>{{ form.submit() }}</p>
+</form>

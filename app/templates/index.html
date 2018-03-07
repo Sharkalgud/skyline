@@ -2,15 +2,15 @@
 <head>
 	<title>Franklin & Adams</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
-  	<script src="http://code.jquery.com/jquery-1.10.2.js"></script>
-  	<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<link href="css/animate.css" rel="stylesheet"/>
-	<link href="css/waypoints.css" rel="stylesheet"/>
-	<script src="js/jquery.waypoints.min.js" type="text/javascript"></script>
-	<script src="js/waypoints.js" type="text/javascript"></script>
-	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="{{url_for('static', filename = 'css/style.css')}}">
+	<link rel="stylesheet" href = "{{url_for('static', filename = 'css/jquery-ui.css')}}">
+  	<script src="{{url_for('static', filename = 'js/jquery-3.3.1.js')}}"></script>
+  	<script src="{{url_for('static', filename = 'js/jquery-ui.js')}}"></script>
+	<link href="{{url_for('static', filename = 'css/animate.css')}}" rel="stylesheet"/>
+	<link href="{{url_for('static', filename = 'css/waypoints.css')}}" rel="stylesheet"/>
+	<script src="{{url_for('static', filename = 'js/jquery.waypoints.min.js')}}" type="text/javascript"></script>
+	<script src="{{url_for('static', filename = 'js/waypoints.js')}}" type="text/javascript"></script>
+	<link rel="shortcut icon" href="{{url_for('static', filename = 'media/favicon.ico')}}" type="image/x-icon">
 </head>
 
 <body>
@@ -21,7 +21,7 @@
 	<div id="wrapper">
 		<div class="background-wrap">
 			<video id="video-bg-elem" preload="auto" autoplay="true" loop="loop" muted="muted"> 
-				<source src="video.mp4" type="video/mp4">
+				<source src="{{url_for('static', filename = 'media/video.mp4')}}" type="video/mp4">
 				Video not supported
 			</video>          
 		</div>
@@ -31,23 +31,27 @@
 	<section class="intro">
 		<div class="inner">
 			<div class="content">
-
-
-
-				  <div class="modal_container" id="modal">
-            <div class="modal">
-                <a href="#" class="close">X</a>
-                <form action="inner.html">
-                    <input type="text" placeholder="Email" ><br>
-                    <input type="password" placeholder="Password"><br>
-                    <input type="submit" class="btnRegister" value="LOGIN">
-                </form>
-                <a href="https://identitysafe.norton.com/password-generator/" class="forgotPassword" target="_blank">Forgot Password?</a>
-            </div>
-        </div>
-
-
-
+				<div class="modal_container" id="modal">
+		            <div class="modal">
+		                <a href="#" class="close">X</a>
+		                <form action = "" method = "post">
+							{{ form.hidden_tag() }}
+							<p>
+							    {{ form.email(size=32, placeholder = "Email")}}
+							</p>
+							<p>
+						         {{ form.password(size=32, placeholder = "Password") }}
+							</p>
+							<p>{{ form.login() }}</p>
+						</form>
+		                <!-- <form action="inner.html">
+		                    <input type="text" placeholder="Email" ><br>
+		                    <input type="password" placeholder="Password"><br>
+		                    <input type="submit" class="btnRegister" value="LOGIN">
+		                </form> -->
+		                <a href="https://identitysafe.norton.com/password-generator/" class="forgotPassword" target="_blank">Forgot Password?</a>
+		            </div>
+        		</div>
 				<section class="os-animation" data-os-animation="fadeInUp" data-os-animation-delay="0.35s">
 					<h1>Skyline</h1>
 				</section>

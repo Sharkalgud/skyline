@@ -1,7 +1,8 @@
 from app import app
 from app.models import Item, Dish, Order
 from app.dbcom import DishCom, ItemCom, CashCom
-from flask import render_template
+from app.forms import LoginForm
+from flask import render_template, flash, redirect, session
 
 cash = 50000
 
@@ -9,9 +10,18 @@ dishcom = DishCom()
 itemcom = ItemCom()
 cashcom = CashCom()
 
-@app.route('/')
+@app.route('/', methods = ['GET', 'POST'])
 def home_page():
-	return render_template('index.html')
+	form = LoginForm()
+	if form.validate_on_submit():
+		flash('{}'.format(form.email.data[:form.email.data.index('@')]))
+		session['username'] = form.email.data[:form.email.data.index('@')]
+		return redirect('/menu')
+	return render_template('index.html', form = form)
+
+@app.route('/index')
+def index_page():
+	return render_template('inner.html')
 
 @app.route('/menu')
 def get_menu():
@@ -19,7 +29,7 @@ def get_menu():
 	out = ''
 	for d in dishes:
 		out += d.name + ' ' + str(d.price) + '/n'
-	return render_template('menu.html', dishes = dishes)
+	return render_template('menu.html', dishes = dishes, user = session['username'])
 @app.route('/inventory')
 def get_inventory():
 	items = itemcom.get_all_items()
@@ -27,4 +37,4 @@ def get_inventory():
 	out = ''
 	for i in items:
 		out += i.name + ' ' + str(i.count) + ' ' + str(i.price) + '/n'
-	return render_template('inventory.html', items = items, cash = cash)
+	return render_template('inventory.html', items = items, cash = cash, user = session['username'])

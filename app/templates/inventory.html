@@ -1,4 +1,12 @@
-<html>
+{% extends "base.html" %}
+{%block content%}
+    <div><b>Current Cash: {{cash}}</b></div>
+    {% for item in items %}
+        <div><p>{{ item.name }}, count: {{item.count}}, <b>{{ item.price }}</b></p></div>
+    {% endfor %}
+{%endblock%}
+
+<!-- <html>
     <head>
         <title>Skyline - Inventory</title>
     </head>
@@ -9,3 +17,4 @@
         {% endfor %}
     </body>
 </html>
+ -->
