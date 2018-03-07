@@ -1,0 +1,11 @@
+<html>
+    <head>
+        <title>Skyline - Inventory</title>
+    </head>
+    <body>
+    	<div><b>Current Cash: {{cash}}</b></div>
+        {% for item in items %}
+        <div><p>{{ item.name }}, count: {{item.count}}, <b>{{ item.price }}</b></p></div>
+        {% endfor %}
+    </body>
+</html>

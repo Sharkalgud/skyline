@@ -1,0 +1,10 @@
+<html>
+    <head>
+        <title>Skyline - Menu</title>
+    </head>
+    <body>
+        {% for dish in dishes %}
+        <div><p>{{ dish.name }}  <b>{{ dish.price }}</b></p></div>
+        {% endfor %}
+    </body>
+</html>
