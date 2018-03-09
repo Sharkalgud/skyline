@@ -8,4 +8,11 @@ class LoginForm(FlaskForm):
     #remember_me = BooleanField('Remember Me')
     login = SubmitField('LOGIN')
 
-#class OrderForm(FlasForm):
+class AddDishForm(FlaskForm):
+	name = StringField(validators=[DataRequired()])
+	items = StringField(validators=[DataRequired()])
+	price = StringField(validators=[DataRequired()])
+	italianbeef = StringField(validators=[DataRequired()])
+	jibarito = StringField(validators=[DataRequired()])
+	order = SubmitField('Add Dish')
+ 

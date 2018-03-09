@@ -1,18 +1,53 @@
 {% extends "base.html" %}
 {%block content%}
-    {% for dish in dishes %}
-        <div><p>{{ dish.name }} <b>{{ dish.price }}</b></p></div>
-    {% endfor %}
-{%endblock%}
-
-
-    <!-- <html>
-        <head>
-            <title>Skyline - Menu</title>
-        </head>
-        <body>
-            {% for dish in dishes %}
-            <div><p>{{ dish.name }} <b>{{ dish.price }}</b></p></div>
+    <form method="post">
+        <table>
+              <tr>
+                <th>Item</th>
+                <th>Ingredients</th>
+                <th>Price</th>
+                <th>Amount Ordered</th>
+              </tr>
+              {% for dish in dishes %}
+                  <tr>
+                    <td>{{ dish.name }}</td>
+                    <td>
+                    {% for item in dish.items %}
+                        {{ item.name }} 
+                    {% endfor %}
+                    </td>
+                    <td>{{ dish.price }}</td>
+                    <td>
+                    {%if user != 'manager' %}
+                        <input name = "{{dish.name}}" id = "{{dish.name}}" value="0">
+                        <button type = "button" class="button" onClick="add('{{dish.name}}')">+</button>
+                        <button type = "button" class="button" onClick="subtract('{{dish.name}}')">-</button>
+                    {% endif %}
+                    </td>
+                  </tr>
+              {% endfor %}
+        </table>
+        {%if user != 'manager' %}
+            <input id = "submitbuttons" type="submit" value = "Place Order">
+        {% endif %}
+    </form>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+            <p>{{ message }}</p><br>
             {% endfor %}
-        </body>
-    </html> -->
+        {% endif %}
+    {% endwith %}
+    <script type="text/javascript">
+    function add(id) {
+        document.getElementById(id).value = parseInt(document.getElementById(id).value) + 1;
+    };
+    function subtract(id) {
+        if(parseInt(document.getElementById(id).value) > 0){
+            document.getElementById(id).value = parseInt(document.getElementById(id).value) - 1;
+        }
+    };
+    </script>
+{%endblock%}    
+
+<!-- <td>{{form.menu[dish.name]}}</td> -->

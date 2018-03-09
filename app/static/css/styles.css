@@ -16,6 +16,35 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
+h1 {
+  font-family: 'Montserrat';
+}
+h2 {
+  font-family: 'Montserrat';
+}
+h3 {
+  font-family: 'Montserrat';
+}
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%; 
+}
+#submitbuttons {
+  position: relative;
+  left: 45%;
+  padding: 10px 10px 10px 10px;
+  bottom: -100px;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
 #cssmenu:after,
 #cssmenu > ul:after {
   content: ".";

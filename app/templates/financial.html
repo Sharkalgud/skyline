@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{%block content%}
+    <h1>Cash Available: ${{cash}}</h1>
+    <h1>{{price}}</h1>
+    <h2>Past Orders</h2>
+    <table>
+      <tr>
+        <th>Dish Name</th>
+        <th>Time</th>
+      </tr>
+      {% for order in orders %}
+          <tr>
+            <td>{{ order.dish.name }}</td>
+            <td>{{ order.timestamp }}</td>
+          </tr>
+      {% endfor %}
+    </table>
+{%endblock%}

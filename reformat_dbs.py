@@ -39,7 +39,7 @@ ingred_obj = {}
 dish_obj = []
 
 for i in ingredients:
-	ingred_obj[i[0]] = Item(name = i[0], count = i[1], price = 15.00)
+	ingred_obj[i[0]] = Item(name = i[0], count = i[1], price = i[2])
 
 for d in dishes:
 	dish = Dish(name = d[0], price = d[1])

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{%block content%}
+<h3>Add a Dish</h3>
+<form action = "{{url_for('add_dish')}}" method="post">
+    <input name = "name" placeholder="name">
+    <input name = "items" placeholder="items">
+    <input name = "price" placeholder="price">
+    <input type = "submit" value = "Add A Dish">
+</form>
+<h3>Add Item</h3>
+<form action="{{url_for('add_item')}}" method = 'post'>
+    <input name = "name" placeholder="name">
+    <input name = "count" placeholder="count">
+    <input name = "price" placeholder="price">
+    <input type = "submit" value = "Add A Dish">
+</form>
+<h3>Edit or Delete a Dish<h3>
+
+    <table>
+          <tr>
+            <th>Item</th>
+            <th>Ingredients</th>
+            <th>Price</th>
+            <th>Options</th>
+          </tr>
+          {% for dish in dishes %}
+              <tr>
+              	<form action = "{{url_for('edit_dish')}}" method="post">
+                <td>{{ dish.name }}<input type="hidden" name="name" value="{{ dish.name }}"></td>
+                <td><input name = "items" value = "{% for item in dish.items %}{{ item.name }},{% endfor %}"></td>
+                <td><input name = "price" value = "{{ dish.price }}"></td>
+                <td>
+                    <button type = "submit" class="button">Edit</button>
+                    </form>
+                    <form action = "{{url_for('rem_dish')}}" method="post">
+                    	<input type = "hidden" name = "name" value = "{{ dish.name }}">
+                    	<button type = "submit" class="button">Delete</button>
+                    </form>
+                </td>
+              </tr>
+          {% endfor %}
+    </table>
+
+<h3>Edit or Delete an Ingredient<h3>
+
+    <table>
+          <tr>
+            <th>Item</th>
+            <th>Amount</th>
+            <th>Price</th>
+            <th>Options</th>
+          </tr>
+          {% for item in items %}
+              <tr>
+              	<form action = "{{url_for('edit_item')}}" method="post">
+                <td>{{ item.name }}<input type="hidden" name="name" value="{{ item.name }}"></td>
+                <td><input name = "amount" value = "{{ item.count}}"></td>
+                <td><input name = "price" value = "{{ item.price }}"></td>
+                <td>
+                    <button type = "submit" class="button">Edit</button>
+                    </form>
+                    <form action = "{{url_for('rem_item')}}" method="post">
+                    	<input type = "hidden" name = "name" value = "{{ item.name }}">
+                    	<button type = "submit" class="button">Delete</button>
+                    </form>
+                </td>
+              </tr>
+          {% endfor %}
+    </table>
+
+{% endblock %}

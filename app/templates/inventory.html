@@ -1,20 +1,37 @@
 {% extends "base.html" %}
 {%block content%}
-    <div><b>Current Cash: {{cash}}</b></div>
-    {% for item in items %}
-        <div><p>{{ item.name }}, count: {{item.count}}, <b>{{ item.price }}</b></p></div>
-    {% endfor %}
+    <form method="post">
+        <table>
+          <tr>
+            <th>Ingredient</th>
+            <th>Amount Left</th>
+            <th>Price per Unit</th>
+            <th>Order More</th>
+          </tr>
+          {% for item in items %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>{{ item.count }}</td>
+                <td>{{ item.price }}</td>
+                <td>
+                    <input name = "{{item.name}}" id = "{{item.name}}" value="0">
+                    <button type = "button" class="button" onClick="add('{{item.name}}')">+</button>
+                    <button type = "button" class="button" onClick="subtract('{{item.name}}')">-</button>
+                </td>
+              </tr>
+          {% endfor %}
+        </table>
+        <input id = "submitbuttons" type="submit" value = "Update Inventory">
+    </form>
+    <script type="text/javascript">
+    function add(id) {
+        document.getElementById(id).value = parseInt(document.getElementById(id).value) + 1;
+    };
+    function subtract(id) {
+        if(parseInt(document.getElementById(id).value) > 0){
+            document.getElementById(id).value = parseInt(document.getElementById(id).value) - 1;
+        }
+    };
+    </script>
 {%endblock%}
 
-<!-- <html>
-    <head>
-        <title>Skyline - Inventory</title>
-    </head>
-    <body>
-    	<div><b>Current Cash: {{cash}}</b></div>
-        {% for item in items %}
-        <div><p>{{ item.name }}, count: {{item.count}}, <b>{{ item.price }}</b></p></div>
-        {% endfor %}
-    </body>
-</html>
- -->
